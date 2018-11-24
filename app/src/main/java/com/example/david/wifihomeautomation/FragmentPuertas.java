@@ -2,11 +2,26 @@ package com.example.david.wifihomeautomation;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.Socket;
+import java.net.URL;
 
 
 /**
@@ -19,6 +34,18 @@ public class FragmentPuertas extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    Button connect;
+    EditText ipServer;
+    TextView estado;
+    Switch btnSwitchpuerta1,btnSwitchpuerta2;
+    SeekBar seekbarp1, seekbarp2;
+    boolean socketStatus = false;
+    Socket socket;
+    MyClientTask myClientTask;
+    String address;
+    int port = 80;
+    int intensidad1 = 0;
+
     public FragmentPuertas() {
         // Required empty public constructor
     }
@@ -28,7 +55,137 @@ public class FragmentPuertas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_puertas, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment_puertas, container, false);
+        connect = (Button)view.findViewById(R.id.connect);
+        ipServer = (EditText)view.findViewById(R.id.ip_server);
+        estado = (TextView)view.findViewById(R.id.estado);
+        btnSwitchpuerta1 = (Switch) view.findViewById(R.id.switchpuerta1);
+        btnSwitchpuerta2 = (Switch) view.findViewById(R.id.switchpuerta2);
+        seekbarp1 = (SeekBar) view.findViewById(R.id.seekPuerta1);
+        seekbarp1.setMax(180);
+        seekbarp1.setEnabled(false);
+        seekbarp2 = (SeekBar) view.findViewById(R.id.seekPuerta2);
+        seekbarp2.setMax(180);
+        seekbarp2.setEnabled(false);
+
+        btnSwitchpuerta1.setOnClickListener(OnOffLedClickListener);
+        btnSwitchpuerta2.setOnClickListener(OnOffLedClickListener);
+        connect.setOnClickListener(connectOnClickListener);
+
+        seekbarp1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String intensisin = "";
+                intensidad1 = progress;
+                intensisin="puerta1" + "?ser=" + String.valueOf(intensidad1);
+                MyClientTask taskEsp = new MyClientTask(address);
+                taskEsp.execute(intensisin);
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        return view;
+    }
+
+
+    View.OnClickListener OnOffLedClickListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            String onoff = "";
+            //CONDICION SWITCH 1
+            if(v.getId()==R.id.switchpuerta1){
+                if(btnSwitchpuerta1.isChecked()){
+                    seekbarp1.setEnabled(true);
+                    seekbarp1.setProgress(90);
+                }else{
+                    seekbarp1.setProgress(0);
+                    seekbarp1.setEnabled(false);
+                }
+            }
+            //CONDICION SWITCH 2
+            if(v.getId()==R.id.switchpuerta2){
+                if(btnSwitchpuerta2.isChecked()){
+                    seekbarp2.setEnabled(true);
+                    seekbarp2.setProgress(90);
+                }else{
+                    seekbarp2.setProgress(0);
+                    seekbarp2.setEnabled(false);
+                }
+            }
+            MyClientTask taskEsp = new MyClientTask(address);
+            taskEsp.execute(onoff);
+        }
+    };
+
+    View.OnClickListener connectOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View arg0) {
+            if(socketStatus)
+                Toast.makeText(getContext(),"Already talking to a Socket!! Disconnect and try again!", Toast.LENGTH_LONG).show();
+            else {
+                socket = null;
+                address = ipServer.getText().toString();
+                if (address == null)
+                    Toast.makeText(getContext(), "Please enter valid address", Toast.LENGTH_LONG).show();
+                else {
+                    myClientTask = new MyClientTask(address);
+                    ipServer.setEnabled(false);
+                    connect.setEnabled(false);
+                    //myClientTask.execute("apagarled");
+                    //encender.setEnabled(true);
+                    estado.setText("IP guardada");
+                }
+            }
+        }
+    };
+
+    public class MyClientTask extends AsyncTask<String,Void,String> {
+        String server;
+        MyClientTask(String server){
+            this.server = server;
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            StringBuffer chaine = new StringBuffer("");
+            final String val = params[0];
+            final String p = "http://"+ server+"/"+val;
+            getActivity().runOnUiThread(new Runnable(){
+                @Override
+                public void run() {
+                    //estado.setText(p);
+                }
+            });
+            String serverResponse = "";
+            try {
+                URL url = new URL(p);
+                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
+                InputStream inputStream = connection.getInputStream();
+                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+                    chaine.append(line);
+                }
+                inputStream.close();
+                System.out.println("chaine: " + chaine.toString());
+                connection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+                serverResponse = e.getMessage();
+            }
+            return serverResponse;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

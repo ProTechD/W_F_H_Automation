@@ -71,7 +71,7 @@
                 android:text="Puerta 2" />
 
             <SeekBar
-                android:id="@+id/seekBarPuerta2"
+                android:id="@+id/seekPuerta2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
