@@ -98,7 +98,7 @@ public class FragmentIluminacion extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String intensisin = "";
-                intensidad1 = progress;
+                intensidad2 = progress;
                 intensisin="luminosidadled2" + "?lumi=" + String.valueOf(intensidad2);
                 MyClientTask taskEsp = new MyClientTask(address);
                 taskEsp.execute(intensisin);
