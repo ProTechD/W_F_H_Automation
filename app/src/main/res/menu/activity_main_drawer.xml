@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:id="@+id/menu_top" android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_iluminacion"
+            android:icon="@mipmap/ic_icon_iluminacion"
+            android:title="Iluminación" />
+        <item
+            android:id="@+id/nav_seguridad"
+            android:icon="@mipmap/ic_icon_seguridad"
+            android:title="Seguridad" />
+        <item
+            android:id="@+id/nav_puertas"
+            android:icon="@mipmap/ic_icon_puertas"
+            android:title="Puertas" />
+        <item
+            android:id="@+id/nav_electrodomesticos"
+            android:icon="@mipmap/ic_icon_electrodomesticos"
+            android:title="Electrodomésticos" />
+    </group>
+
+    <group android:id="@+id/menu_botton" android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@mipmap/ic_icon_ayuda"
+            android:title="Ayuda" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@mipmap/ic_icon_about"
+            android:title="Acerca De" />
+        <item
+            android:id="@+id/nav_close"
+            android:icon="@mipmap/ic_icon_close"
+            android:title="Cerrar App" />
+    </group>
+
+</menu>
