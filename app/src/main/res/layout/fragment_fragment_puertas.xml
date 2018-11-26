@@ -54,26 +54,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/nav_header_vertical_spacing"
+                android:paddingBottom="@dimen/activity_vertical_margin"
                 android:text="Puerta 1" />
 
             <SeekBar
                 android:id="@+id/seekPuerta1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:paddingBottom="@dimen/nav_header_vertical_spacing"/>
 
             <Switch
                 android:id="@+id/switchpuerta2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/nav_header_vertical_spacing"
+                android:paddingBottom="@dimen/activity_vertical_margin"
                 android:text="Puerta 2" />
 
             <SeekBar
                 android:id="@+id/seekPuerta2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:paddingBottom="@dimen/nav_header_vertical_spacing"/>
         </LinearLayout>
     </ScrollView>
 
