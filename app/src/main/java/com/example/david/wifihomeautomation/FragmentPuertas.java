@@ -38,7 +38,7 @@ public class FragmentPuertas extends Fragment {
     EditText ipServer;
     TextView estado;
     Switch btnSwitchpuerta1,btnSwitchpuerta2;
-    SeekBar seekbarp1, seekbarp2;
+    SeekBar seekbarp1, seekbarp2,seekbardiscre;
     boolean socketStatus = false;
     Socket socket;
     MyClientTask myClientTask;
@@ -61,6 +61,7 @@ public class FragmentPuertas extends Fragment {
         estado = (TextView)view.findViewById(R.id.estado);
         btnSwitchpuerta1 = (Switch) view.findViewById(R.id.switchpuerta1);
         btnSwitchpuerta2 = (Switch) view.findViewById(R.id.switchpuerta2);
+        seekbardiscre = (SeekBar) view.findViewById(R.id.seekBardis);
         seekbarp1 = (SeekBar) view.findViewById(R.id.seekPuerta1);
         seekbarp1.setMax(180);
         seekbarp1.setEnabled(false);
@@ -78,6 +79,7 @@ public class FragmentPuertas extends Fragment {
                 String intensisin = "";
                 intensidad1 = progress;
                 intensisin="puerta1" + "?ser=" + String.valueOf(intensidad1);
+                btnSwitchpuerta1.setText("Puerta 1 (" + String.valueOf(intensidad1) +"°)");
                 MyClientTask taskEsp = new MyClientTask(address);
                 taskEsp.execute(intensisin);
             }
