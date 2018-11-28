@@ -64,6 +64,7 @@ public class FragmentSeguridad extends Fragment {
         distancia = (Button) view.findViewById(R.id.btnDistancia);
         numdistancia = (EditText) view.findViewById(R.id.txtDistancia);
 
+        swtchsensor.setOnClickListener(OnoffSwitchOnClickListener);
         connect.setOnClickListener(connectOnClickListener);
         distancia.setOnClickListener(enviarDistnaciaOnClickListener);
 
