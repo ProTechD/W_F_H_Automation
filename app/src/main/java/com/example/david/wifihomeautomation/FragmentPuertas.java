@@ -61,7 +61,7 @@ public class FragmentPuertas extends Fragment {
         estado = (TextView)view.findViewById(R.id.estado);
         btnSwitchpuerta1 = (Switch) view.findViewById(R.id.switchpuerta1);
         btnSwitchpuerta2 = (Switch) view.findViewById(R.id.switchpuerta2);
-        seekbardiscre = (SeekBar) view.findViewById(R.id.seekBardis);
+        //seekbardiscre = (SeekBar) view.findViewById(R.id.seekBardis);
         seekbarp1 = (SeekBar) view.findViewById(R.id.seekPuerta1);
         seekbarp1.setMax(180);
         seekbarp1.setEnabled(false);
