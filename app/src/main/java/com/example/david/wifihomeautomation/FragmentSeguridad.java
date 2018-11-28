@@ -77,9 +77,9 @@ public class FragmentSeguridad extends Fragment {
             String tanci = "";
             if(v.getId()==R.id.switchsensor){
                 if(swtchsensor.isChecked()){
-                    tanci = "ultrasonico" + "?ultra=" + "70";
+                    tanci = "ultrasonico" + "?ultra=" + "30";
                 }else{
-                    tanci = "ultrasonico" + "?ultra=" + "50";
+                    tanci = "ultrasonico" + "?ultra=" + "0";
                 }
             }
             MyClientTask taskEsp = new MyClientTask(address);
