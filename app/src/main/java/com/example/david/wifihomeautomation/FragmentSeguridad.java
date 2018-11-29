@@ -158,6 +158,7 @@ public class FragmentSeguridad extends Fragment {
                 }
                 inputStream.close();
                 System.out.println("chaine: " + chaine.toString());
+                //allinformation.setText(chaine.toString());
                 connection.disconnect();
             } catch (IOException e) {
                 e.printStackTrace();
