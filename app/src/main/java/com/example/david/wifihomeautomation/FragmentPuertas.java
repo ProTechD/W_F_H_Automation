@@ -37,8 +37,8 @@ public class FragmentPuertas extends Fragment {
     Button connect;
     EditText ipServer;
     TextView estado;
-    Switch btnSwitchpuerta1,btnSwitchpuerta2;
-    SeekBar seekbarp1, seekbarp2,seekbardiscre;
+    Switch btnSwitchpuerta1;
+    SeekBar seekbarp1;
     boolean socketStatus = false;
     Socket socket;
     MyClientTask myClientTask;
@@ -60,17 +60,12 @@ public class FragmentPuertas extends Fragment {
         ipServer = (EditText)view.findViewById(R.id.ip_server);
         estado = (TextView)view.findViewById(R.id.estado);
         btnSwitchpuerta1 = (Switch) view.findViewById(R.id.switchpuerta1);
-        btnSwitchpuerta2 = (Switch) view.findViewById(R.id.switchpuerta2);
         //seekbardiscre = (SeekBar) view.findViewById(R.id.seekBardis);
         seekbarp1 = (SeekBar) view.findViewById(R.id.seekPuerta1);
-        seekbarp1.setMax(180);
+        seekbarp1.setMax(90);
         seekbarp1.setEnabled(false);
-        seekbarp2 = (SeekBar) view.findViewById(R.id.seekPuerta2);
-        seekbarp2.setMax(180);
-        seekbarp2.setEnabled(false);
 
         btnSwitchpuerta1.setOnClickListener(OnOffLedClickListener);
-        btnSwitchpuerta2.setOnClickListener(OnOffLedClickListener);
         connect.setOnClickListener(connectOnClickListener);
 
         seekbarp1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -109,16 +104,6 @@ public class FragmentPuertas extends Fragment {
                 }else{
                     seekbarp1.setProgress(0);
                     seekbarp1.setEnabled(false);
-                }
-            }
-            //CONDICION SWITCH 2
-            if(v.getId()==R.id.switchpuerta2){
-                if(btnSwitchpuerta2.isChecked()){
-                    seekbarp2.setEnabled(true);
-                    seekbarp2.setProgress(90);
-                }else{
-                    seekbarp2.setProgress(0);
-                    seekbarp2.setEnabled(false);
                 }
             }
             MyClientTask taskEsp = new MyClientTask(address);

@@ -26,15 +26,9 @@
             android:inputType="numberDecimal|textUri" />
 
         <Button
-            android:id="@+id/connect"
+            android:id="@+id/ip_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Conectar" />
-
-        <TextView
-            android:id="@+id/estado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Guardar IP" />
     </LinearLayout>
 </FrameLayout>
