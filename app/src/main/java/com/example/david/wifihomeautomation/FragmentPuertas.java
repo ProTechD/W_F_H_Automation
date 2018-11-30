@@ -1,6 +1,7 @@
 package com.example.david.wifihomeautomation;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -67,6 +68,9 @@ public class FragmentPuertas extends Fragment {
 
         btnSwitchpuerta1.setOnClickListener(OnOffLedClickListener);
         connect.setOnClickListener(connectOnClickListener);
+
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("datos",Context.MODE_PRIVATE);
+        ipServer.setText(preferences.getString("number",""));
 
         seekbarp1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

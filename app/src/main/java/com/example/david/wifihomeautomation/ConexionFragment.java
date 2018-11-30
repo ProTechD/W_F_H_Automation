@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,14 +59,18 @@ public class ConexionFragment extends Fragment {
         guardarip.setOnClickListener(connectOnClickListener);
 
         SharedPreferences preferences = this.getActivity().getSharedPreferences("datos",Context.MODE_PRIVATE);
-
+        ipServer.setText(preferences.getString("number",""));
         return view;
     }
 
     View.OnClickListener connectOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View arg0) {
-
+            SharedPreferences preferencias = getActivity().getSharedPreferences("datos",Context.MODE_PRIVATE);
+            SharedPreferences.Editor Obj_editor = preferencias.edit();
+            Obj_editor.putString("number", ipServer.getText().toString());
+            Obj_editor.commit();
+            Snackbar.make(arg0, "IP GUARDADA CON EXITO!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
         }
     };
 

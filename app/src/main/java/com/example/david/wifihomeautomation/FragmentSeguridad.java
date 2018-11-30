@@ -1,6 +1,7 @@
 package com.example.david.wifihomeautomation;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -68,6 +69,8 @@ public class FragmentSeguridad extends Fragment {
         connect.setOnClickListener(connectOnClickListener);
         distancia.setOnClickListener(enviarDistnaciaOnClickListener);
 
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("datos",Context.MODE_PRIVATE);
+        ipServer.setText(preferences.getString("number",""));
         return view;
     }
 
