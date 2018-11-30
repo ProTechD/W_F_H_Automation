@@ -76,6 +76,8 @@ public class FragmentIluminacion extends Fragment {
         btnSwitchled2.setOnClickListener(OnOffLedClickListener);
         connect.setOnClickListener(connectOnClickListener);
 
+
+
         SharedPreferences preferences = this.getActivity().getSharedPreferences("datos",Context.MODE_PRIVATE);
         ipServer.setText(preferences.getString("number",""));
 

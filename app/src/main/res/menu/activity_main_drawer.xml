@@ -25,8 +25,8 @@
     <group android:id="@+id/menu_botton" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_help"
-            android:icon="@mipmap/ic_icon_ayuda"
-            android:title="Ayuda" />
+            android:icon="@mipmap/ic_icon_connection"
+            android:title="Conexión" />
         <item
             android:id="@+id/nav_about"
             android:icon="@mipmap/ic_icon_about"
