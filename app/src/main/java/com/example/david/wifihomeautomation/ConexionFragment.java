@@ -66,11 +66,15 @@ public class ConexionFragment extends Fragment {
     View.OnClickListener connectOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View arg0) {
-            SharedPreferences preferencias = getActivity().getSharedPreferences("datos",Context.MODE_PRIVATE);
-            SharedPreferences.Editor Obj_editor = preferencias.edit();
-            Obj_editor.putString("number", ipServer.getText().toString());
-            Obj_editor.commit();
-            Snackbar.make(arg0, "IP GUARDADA CON EXITO!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            if(ipServer.getText().length()==0){
+                Snackbar.make(arg0, "Debe ingresar una IP valida!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            }else {
+                SharedPreferences preferencias = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+                SharedPreferences.Editor Obj_editor = preferencias.edit();
+                Obj_editor.putString("number", ipServer.getText().toString());
+                Obj_editor.commit();
+                Snackbar.make(arg0, "IP GUARDADA CON EXITO!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            }
         }
     };
 
