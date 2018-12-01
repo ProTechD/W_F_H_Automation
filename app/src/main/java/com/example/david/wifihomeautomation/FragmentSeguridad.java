@@ -64,7 +64,7 @@ public class FragmentSeguridad extends Fragment {
         swtchsensor = (Switch) view.findViewById(R.id.switchsensor);
         distancia = (Button) view.findViewById(R.id.btnDistancia);
         numdistancia = (EditText) view.findViewById(R.id.txtDistancia);
-        numdistancia.setEnabled(false);
+        distancia.setEnabled(false);
 
         swtchsensor.setOnClickListener(OnoffSwitchOnClickListener);
         connect.setOnClickListener(connectOnClickListener);
@@ -82,7 +82,7 @@ public class FragmentSeguridad extends Fragment {
             if(v.getId()==R.id.switchsensor){
                 if(swtchsensor.isChecked()){
                     tanci = "ultrasonico" + "?ultra=" + "30";
-                    numdistancia.setEnabled(true);
+                    distancia.setEnabled(true);
                 }else{
                     tanci = "ultrasonico" + "?ultra=" + "0";
                 }
